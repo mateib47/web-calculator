@@ -4,9 +4,10 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { useState } from "react";
+import Display from "../Display/Display";
 
 const Calculator = () => {
-  const [expr, setExpr] = useState("");
+  const [expr, setExpr] = useState(0);
 
   let chars = [
     { char: "1", id: "one" },
@@ -18,17 +19,26 @@ const Calculator = () => {
     { char: "7", id: "seven" },
     { char: "8", id: "eight" },
     { char: "9", id: "nine" },
+    { char: "0", id: "zero" },
+    { char: "+", id: "add" },
+    { char: "-", id: "subtract" },
+    { char: "*", id: "multiply" },
+    { char: "/", id: "divide" },
+    { char: ".", id: "decimal" },
+    { char: "=", id: "equals" },
+
+
   ];
   return (
     <div className="calculator">
       <div className="top">
-        <div className="textBox">{expr}</div>
+          <Display text={expr} />
       </div>
       <div className="bottom">
         <Box sx={{ flexGrow: 1 }}>
-          <Grid container spacing={3}>
+          <Grid container spacing={1}>
             {chars.map((c) => (
-              <Grid item xs={4}>
+              <Grid item xs={3}>
                 <Button character={c.char} id={c.id} setExpr={setExpr} expr={expr} />
               </Grid>
             ))}
