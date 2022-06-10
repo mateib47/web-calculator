@@ -10,6 +10,8 @@ const Calculator = () => {
   const [expr, setExpr] = useState(0);
 
   let chars = [
+    { char: "AC", id: "clear"},
+    { char: "DEL", id: "delete"},
     { char: "1", id: "one" },
     { char: "2", id: "two" },
     { char: "3", id: "three" },
