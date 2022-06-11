@@ -2,18 +2,25 @@ import "./button.scss";
 
 const Button = ({ character, id, setExpr, expr }) => {
   const handleChange = () => {
-    if (character == "AC") {
-      setExpr(0);
-    } else if (character == "DEL"){
-        setExpr(expr.slice(-1))
-    }else if(character == "="){
-        setExpr(evalExpr(expr));
+    switch(character){
+        case "AC":
+            setExpr(0);
+            break;
+        case "DEL":
+            expr.length > 1 ? setExpr(expr.slice(0,-1)) : setExpr(0);
+            break;
+        case "=":
+            setExpr(evalExpr(expr));
+            break;
+        case ".":
+            if (expr.slice(-1) ==".")
+            break
+        case "0":
+            if (expr == 0)
+            break
+        default:
+            expr == 0 ? setExpr(character) : setExpr("" + expr + character);
     }
-    
-    else if (!(expr == 0 && character == 0)) {
-      //make it nicer
-      setExpr("" + expr + character);
-    }//make switch case 
   };
 
   const evalExpr = (fn) => {

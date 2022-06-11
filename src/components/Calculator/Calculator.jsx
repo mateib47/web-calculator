@@ -28,7 +28,8 @@ const Calculator = () => {
     { char: "/", id: "divide" },
     { char: ".", id: "decimal" },
     { char: "=", id: "equals" },
-
+    { char: "(", id: "lpar" },
+    { char: ")", id: "rpar" },
 
   ];
   return (
