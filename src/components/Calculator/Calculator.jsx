@@ -8,6 +8,7 @@ import Display from "../Display/Display";
 
 const Calculator = () => {
   const [expr, setExpr] = useState(0);
+  const [decimal, setDecimal] = useState(0)
 
   let chars = [
     { char: "AC", id: "clear"},
@@ -42,7 +43,7 @@ const Calculator = () => {
           <Grid container spacing={1}>
             {chars.map((c) => (
               <Grid item xs={3}>
-                <Button character={c.char} id={c.id} setExpr={setExpr} expr={expr} />
+                <Button character={c.char} id={c.id} setExpr={setExpr} expr={expr} decimal={decimal} setDecimal={setDecimal}/>
               </Grid>
             ))}
           </Grid>
