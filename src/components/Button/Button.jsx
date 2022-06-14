@@ -9,7 +9,7 @@ const Button = ({ character, id, setExpr, expr, decimal, setDecimal }) => {
         setDecimal(0);
         break;
       case "DEL":
-        if (expr.slice(-1) == ".") setDecimal(0);
+        if (expr && expr.slice(-1) == ".") setDecimal(0);
         expr.length > 1 ? setExpr(expr.slice(0, -1)) : setExpr(0);
         break;
       case "=":
@@ -27,18 +27,26 @@ const Button = ({ character, id, setExpr, expr, decimal, setDecimal }) => {
         if (expr == 0) {
           handleFirstChar(character);
         } else {
-            console.log(character.indexOf("+-*/")); // fixme
-          if (character.indexOf("+-*/") != -1) 
+          if (isOperator(character)) {
+            console.log(expr.slice(0, -1));
             setDecimal(0);
+            if (!isOperator(expr.slice(-1))) {
+              setExpr("" + expr.slice(0, -1));
+            }
+          }
           setExpr("" + expr + character);
         }
     }
     console.log("after " + decimal);
   }; //3 + 5 * 6 - 2 / 4
 
+  const isOperator = (o) => {
+    if (o == "%" || o == "/" || o == "*" || o == "+" || o == "-") return true;
+    return false;
+  };
+
   const handleFirstChar = (char) => {
-    //console.log(char.indexOf("+-*/)."));
-    if (char.indexOf("+-*/).") == -1) setExpr(character);
+    if (!isOperator(char)) setExpr(character);
   };
   //console.log(decimal)
   const evalExpr = (fn) => {
