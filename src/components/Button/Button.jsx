@@ -2,7 +2,6 @@ import "./button.scss";
 
 const Button = ({ character, id, setExpr, expr, decimal, setDecimal }) => {
   const handleChange = () => {
-    console.log("before " + decimal);
     switch (character) {
       case "AC":
         setExpr(0);
@@ -27,17 +26,20 @@ const Button = ({ character, id, setExpr, expr, decimal, setDecimal }) => {
         if (expr == 0) {
           handleFirstChar(character);
         } else {
+         // console.log(expr);
           if (isOperator(character)) {
-            console.log(expr.slice(0, -1));
             setDecimal(0);
-            if (!isOperator(expr.slice(-1))) {
-              setExpr("" + expr.slice(0, -1));
+            if (isOperator(expr.slice(-1))) {
+              setExpr(expr.slice(0,-1) + character);
+            }else{
+              setExpr("" + expr + character);
+
             }
+          }else{
+            setExpr("" + expr + character);
           }
-          setExpr("" + expr + character);
         }
     }
-    console.log("after " + decimal);
   }; //3 + 5 * 6 - 2 / 4
 
   const isOperator = (o) => {
@@ -50,7 +52,10 @@ const Button = ({ character, id, setExpr, expr, decimal, setDecimal }) => {
   };
   //console.log(decimal)
   const evalExpr = (fn) => {
-    return new Function("return " + fn)();
+    //console.log(fn);
+    const result = (new Function("return " + fn)()).toString()
+   // console.log(result);
+    return result;
   };
 
   return (
