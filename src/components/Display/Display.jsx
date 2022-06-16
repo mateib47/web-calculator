@@ -1,9 +1,9 @@
 import './display.scss'
 
 const Display = ({text}) => {
-  console.log(text);
+  console.log("display update: " + text);
   return (
-    <div className='display' id='display'>{text}</div>
+    <div className='display' id='display'><p>{text}</p></div>
   )
 }
 export default Display

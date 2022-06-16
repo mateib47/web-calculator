@@ -8,11 +8,10 @@ import Display from "../Display/Display";
 
 const Calculator = () => {
   const [expr, setExpr] = useState(0);
-  const [decimal, setDecimal] = useState(0)
+  const [decimal, setDecimal] = useState(0);
 
   let chars = [
-    { char: "AC", id: "clear"},
-    { char: "DEL", id: "delete"},
+    { char: "DEL", id: "delete" },
     { char: "1", id: "one" },
     { char: "2", id: "two" },
     { char: "3", id: "three" },
@@ -31,21 +30,35 @@ const Calculator = () => {
     { char: "=", id: "equals" },
     { char: "(", id: "lpar" },
     { char: ")", id: "rpar" },
-
   ];
   return (
     <div className="calculator">
       <div className="top">
-          <Display text={expr} />
+        <div className="display" id="display">
+          {expr}
+        </div>
       </div>
       <div className="bottom">
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={1}>
             {chars.map((c) => (
               <Grid item xs={3}>
-                <Button character={c.char} id={c.id} setExpr={setExpr} expr={expr} decimal={decimal} setDecimal={setDecimal}/>
+                <Button
+                  character={c.char}
+                  id={c.id}
+                  setExpr={setExpr}
+                  expr={expr}
+                  decimal={decimal}
+                  setDecimal={setDecimal}
+                />
               </Grid>
             ))}
+            <button id="clear"
+              onClick={() => {
+                setExpr(0);
+                setDecimal(0);
+              }}
+            >AC</button>
           </Grid>
         </Box>
       </div>

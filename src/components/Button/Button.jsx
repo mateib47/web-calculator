@@ -2,6 +2,7 @@ import "./button.scss";
 
 const Button = ({ character, id, setExpr, expr, decimal, setDecimal }) => {
   const handleChange = () => {
+    console.log(character);
     switch (character) {
       case "AC":
         setExpr(0);
@@ -29,7 +30,7 @@ const Button = ({ character, id, setExpr, expr, decimal, setDecimal }) => {
          // console.log(expr);
           if (isOperator(character)) {
             setDecimal(0);
-            if (isOperator(expr.slice(-1))) {
+            if (isOperator(expr.slice(-1)) && !(character == '-')) {
               setExpr(expr.slice(0,-1) + character);
             }else{
               setExpr("" + expr + character);
