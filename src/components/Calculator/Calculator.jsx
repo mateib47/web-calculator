@@ -9,8 +9,10 @@ import Display from "../Display/Display";
 const Calculator = () => {
   const [expr, setExpr] = useState(0);
   const [decimal, setDecimal] = useState(0);
+  console.log("expr " + expr);
 
   let chars = [
+    { char: "AC", id: "clear" },
     { char: "DEL", id: "delete" },
     { char: "1", id: "one" },
     { char: "2", id: "two" },
@@ -53,12 +55,12 @@ const Calculator = () => {
                 />
               </Grid>
             ))}
-            <button id="clear"
+            {/* <button id="clear"
               onClick={() => {
                 setExpr(0);
                 setDecimal(0);
               }}
-            >AC</button>
+            >AC</button> */}
           </Grid>
         </Box>
       </div>
