@@ -1,62 +1,55 @@
 import "./button.scss";
-import { flushSync } from "react-dom";
 
-const Button = ({ character, id, setExpr, expr, decimal, setDecimal }) => {
+const Button = ({ character, id, setExpr, expr, decimal, setDecimal, result, setResult }) => {
   const handleChange = () => {
     console.log(character);
     switch (character) {
       case "AC":
-        flushSync(() => {
         setExpr(0);
-        setDecimal(0);});
+        setDecimal(0);
+        setResult(0);
         break;
       case "DEL":
-        if (expr && expr.slice(-1) == ".") flushSync(() => {
-          setDecimal(0);});
-
-        expr.length > 1 ? flushSync(() => {
-          setExpr(expr.slice(0, -1))}) : flushSync(() => {setExpr(0);});
-
+        if (expr && expr.slice(-1) == ".") setDecimal(0);
+        expr.length > 1 ? setExpr(expr.slice(0, -1)) : setExpr(0);
         break;
       case "=":
-        flushSync(() => {
-          setExpr(evalExpr(expr));
-        });
-
+        let res = evalExpr(expr);
+        setExpr(res);
+        setResult(res);
         break;
       case ".":
         if (decimal == 1) {
           break;
         } else {
-          flushSync(() => {
-            setDecimal(decimal + 1);});
-
+          setDecimal(decimal + 1);
         }
       case "0":
         if (expr == 0) break;
       default:
-        if (expr == 0) {
+        if (result != 0){
+          if(isOperator(character)){
+            setExpr(result + character)
+          }else{
+            handleFirstChar(character);
+
+          }
+          setResult(0);
+        }
+        else if (expr == 0) {
           handleFirstChar(character);
         } else {
          // console.log(expr);
           if (isOperator(character)) {
-            flushSync(() => {
-              setDecimal(0);});
-
+            setDecimal(0);
             if (isOperator(expr.slice(-1)) && !(character == '-')) {
-              flushSync(() => {
-                setExpr(expr.slice(0,-1) + character);});
-
+              setExpr(expr.slice(0,-1) + character);
             }else{
-              flushSync(() => {
-                setExpr("" + expr + character);});
-
+              setExpr("" + expr + character);
 
             }
           }else{
-            flushSync(() => {
-              setExpr("" + expr + character);});
-
+            setExpr("" + expr + character);
           }
         }
     }
@@ -68,9 +61,7 @@ const Button = ({ character, id, setExpr, expr, decimal, setDecimal }) => {
   };
 
   const handleFirstChar = (char) => {
-    if (!isOperator(char)) flushSync(() => {
-      setExpr(character);});
-
+    if (!isOperator(char)) setExpr(character);
   };
   //console.log(decimal)
   const evalExpr = (fn) => {

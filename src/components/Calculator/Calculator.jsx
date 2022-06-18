@@ -5,12 +5,12 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { useState } from "react";
 import Display from "../Display/Display";
+import Result from "../Result/Result";
 
-const Calculator = () => {
-  const [expr, setExpr] = useState(0);
+const Calculator = ({expr, setExpr}) => {
+
   const [decimal, setDecimal] = useState(0);
-  console.log("expr " + expr);
-
+  const [result, setResult] = useState(0);
   let chars = [
     { char: "AC", id: "clear" },
     { char: "DEL", id: "delete" },
@@ -36,9 +36,8 @@ const Calculator = () => {
   return (
     <div className="calculator">
       <div className="top">
-        <div className="display" id="display">
-          {expr}
-        </div>
+      <Display text={expr} />
+      <Result result={result} setResult={setResult} />
       </div>
       <div className="bottom">
         <Box sx={{ flexGrow: 1 }}>
@@ -52,15 +51,11 @@ const Calculator = () => {
                   expr={expr}
                   decimal={decimal}
                   setDecimal={setDecimal}
+                  result={result}
+                  setResult={setResult} 
                 />
               </Grid>
             ))}
-            {/* <button id="clear"
-              onClick={() => {
-                setExpr(0);
-                setDecimal(0);
-              }}
-            >AC</button> */}
           </Grid>
         </Box>
       </div>
