@@ -1,6 +1,15 @@
 import "./button.scss";
 
-const Button = ({ character, id, setExpr, expr, decimal, setDecimal, result, setResult }) => {
+const Button = ({
+  character,
+  id,
+  setExpr,
+  expr,
+  decimal,
+  setDecimal,
+  result,
+  setResult,
+}) => {
   const handleChange = () => {
     console.log(character);
     switch (character) {
@@ -27,33 +36,24 @@ const Button = ({ character, id, setExpr, expr, decimal, setDecimal, result, set
       case "0":
         if (expr == 0) break;
       default:
-        if (result != 0){
-          if(isOperator(character)){
-            setExpr(result + character)
-          }else{
+        if (result != 0) {
+          if (isOperator(character)) {
+            setExpr(result + character);
+          } else {
             handleFirstChar(character);
-
           }
           setResult(0);
-        }
-        else if (expr == 0) {
+        } else if (expr == 0) {
           handleFirstChar(character);
         } else {
-         // console.log(expr);
           if (isOperator(character)) {
-            setDecimal(0);
-            if (isOperator(expr.slice(-1)) && !(character == '-')) {
-              setExpr(expr.slice(0,-1) + character);
-            }else{
-              setExpr("" + expr + character);
-
-            }
-          }else{
+            handleOperator(character);
+          } else {
             setExpr("" + expr + character);
           }
         }
     }
-  }; //3 + 5 * 6 - 2 / 4
+  };
 
   const isOperator = (o) => {
     if (o == "%" || o == "/" || o == "*" || o == "+" || o == "-") return true;
@@ -63,11 +63,24 @@ const Button = ({ character, id, setExpr, expr, decimal, setDecimal, result, set
   const handleFirstChar = (char) => {
     if (!isOperator(char)) setExpr(character);
   };
-  //console.log(decimal)
+
+  const handleOperator = () => {
+    setDecimal(0);
+    if (isOperator(expr.slice(-1))) {
+      if (isOperator(expr.slice(-2)[0])) {
+        setExpr(expr.slice(0, -2) + character);
+        return;
+      } else if (!(character == "-")) {
+        setExpr(expr.slice(0, -1) + character);
+        return;
+      }
+    }
+    setExpr("" + expr + character);
+
+  };
+
   const evalExpr = (fn) => {
-    //console.log(fn);
-    const result = (new Function("return " + fn)()).toString()
-   // console.log(result);
+    const result = new Function("return " + fn)().toString();
     return result;
   };
 
