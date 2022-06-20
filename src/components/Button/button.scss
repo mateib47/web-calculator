@@ -1,13 +1,15 @@
 .button{
     background-color: #3D3C40;
-    width: 60px;
-    height: 60px;
+    width: 65px;
+    height: 65px;
     border-radius: 50%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: #f6f6f6;
+    color: #F2B705;
     font-weight: 600;
     cursor: pointer;
+    border-style: groove;
+    border-color: #F2B705;
 }
