@@ -41,10 +41,10 @@ const Calculator = ({expr, setExpr}) => {
       <Result result={result} setResult={setResult} />
       </div>
       <div className="bottom">
-        <Box sx={{ flexGrow: 1 }}>
-          <Grid container spacing={0.5}>
+        <Box sx={{ flexGrow: 1, height:'90%' }}>
+          <Grid container spacing={0} sx={{height:'100%'}}>
             {chars.map((c) => (
-              <Grid item xs={3} sx={{display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center' }}>
+              <Grid item xs={3}>
                 <Button
                   character={c.char}
                   id={c.id}

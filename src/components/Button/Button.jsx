@@ -1,4 +1,5 @@
 import "./button.scss";
+import { useEffect } from "react";
 
 const Button = ({
   character,
@@ -10,8 +11,11 @@ const Button = ({
   result,
   setResult,
 }) => {
-  const handleChange = () => {
-    console.log(character);
+  const handleChange = (...args) => {
+    console.log(args);
+    if(args[0].key){
+      character = args[0].key; //FIXME keyboard stroke resets the whole expression
+    }
     switch (character) {
       case "AC":
         setExpr(0);
@@ -54,6 +58,13 @@ const Button = ({
         }
     }
   };
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleChange);
+    return () => {
+      window.removeEventListener("keydown", handleChange);
+    };
+  }, []);
 
   const isOperator = (o) => {
     if (o == "%" || o == "/" || o == "*" || o == "+" || o == "-") return true;
