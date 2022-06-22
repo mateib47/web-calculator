@@ -11,6 +11,7 @@ const Calculator = ({expr, setExpr}) => {
 
   const [decimal, setDecimal] = useState(0);
   const [result, setResult] = useState(0);
+  
   let chars = [
     { char: "AC", id: "clear" },
     { char: "DEL", id: "delete" },
@@ -37,7 +38,7 @@ const Calculator = ({expr, setExpr}) => {
   return (
     <div className="calculator">
       <div className="top">
-      <Display text={expr} />
+      <Display text={expr.current} />
       <Result result={result} setResult={setResult} />
       </div>
       <div className="bottom">
