@@ -11,14 +11,12 @@ const Button = ({
   result,
   setResult,
 }) => {
-  const handleChange = (...args) => {
-    //console.log(args);
-    if (args[0].key) {
-      character = args[0].key; //FIXME keyboard stroke resets the whole expression
-    }
-    //console.log(character);
-    //console.log(expr);
 
+  const handleKeyboard = () => {
+
+  }
+
+  const handleChange = (character) => {
     switch (character) {
       case "AC":
         setExpr(0);
@@ -62,12 +60,12 @@ const Button = ({
     }
   };
 
-  useEffect(() => {
-    window.addEventListener("keydown", handleChange);
-    return () => {
-      window.removeEventListener("keydown", handleChange);
-    };
-  }, []);
+  // useEffect(() => {
+  //   window.addEventListener("keydown", handleKeyboard);
+  //   return () => {
+  //     window.removeEventListener("keydown", handleKeyboard);
+  //   };
+  // }, []);
 
   const isOperator = (o) => {
     if (o == "%" || o == "/" || o == "*" || o == "+" || o == "-") return true;

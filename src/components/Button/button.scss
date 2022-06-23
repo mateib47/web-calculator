@@ -11,4 +11,13 @@
     cursor: pointer;
     border-style: groove;
     border-color: #F2B705;
+    transition: all 0.2s ease-out;
+     
+    &:hover{
+        background-color: #78768085;
+
+    }
+    &:active{
+        border-style: none;
+    }
 }

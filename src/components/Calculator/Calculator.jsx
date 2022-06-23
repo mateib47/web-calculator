@@ -38,7 +38,7 @@ const Calculator = ({expr, setExpr}) => {
   return (
     <div className="calculator">
       <div className="top">
-      <Display text={expr.current} />
+      <Display text={expr} />
       <Result result={result} setResult={setResult} />
       </div>
       <div className="bottom">

@@ -5,19 +5,19 @@ import { useState, useRef } from 'react';
 import Display from './components/Display/Display';
 
 const App = () => {
-  const [expr, _setExpr] = useState('0');
+  const [expr, setExpr] = useState('0');
   const exprRef = useRef(expr);
-  const setExpr = data => {
-    exprRef.current = data;
-    _setExpr(data);
-  };
+  // const setExpr = data => {
+  //   exprRef.current = data;
+  //   _setExpr(data);
+  // };
 
   return (
     <div className='app'>
       <Topbar />
       <div className='section'>
 
-        <Calculator expr={exprRef} setExpr={setExpr}/>
+        <Calculator expr={expr} setExpr={setExpr}/>
       </div>
     </div>
   )
