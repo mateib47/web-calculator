@@ -6,12 +6,12 @@ import Grid from "@mui/material/Grid";
 import { useState } from "react";
 import Display from "../Display/Display";
 import Result from "../Result/Result";
+import History from "../History/History";
 
-const Calculator = ({expr, setExpr}) => {
-
+const Calculator = ({ expr, setExpr, history, setHistory }) => {
   const [decimal, setDecimal] = useState(0);
   const [result, setResult] = useState(0);
-  
+
   let chars = [
     { char: "AC", id: "clear" },
     { char: "DEL", id: "delete" },
@@ -33,17 +33,17 @@ const Calculator = ({expr, setExpr}) => {
     { char: ")", id: "rpar" },
     { char: "0", id: "zero" },
     { char: "=", id: "equals" },
-
   ];
   return (
     <div className="calculator">
       <div className="top">
-      <Display text={expr} />
-      <Result result={result} setResult={setResult} />
+        <Display text={expr} />
+        <History text={history} />
+        <Result result={result} setResult={setResult} />
       </div>
       <div className="bottom">
-        <Box sx={{ flexGrow: 1, height:'90%' }}>
-          <Grid container spacing={0} sx={{height:'100%'}}>
+        <Box sx={{ flexGrow: 1, height: "90%" }}>
+          <Grid container spacing={0} sx={{ height: "100%" }}>
             {chars.map((c) => (
               <Grid item xs={3}>
                 <Button
@@ -54,7 +54,9 @@ const Calculator = ({expr, setExpr}) => {
                   decimal={decimal}
                   setDecimal={setDecimal}
                   result={result}
-                  setResult={setResult} 
+                  setResult={setResult}
+                  history={history}
+                  setHistory={setHistory}
                 />
               </Grid>
             ))}

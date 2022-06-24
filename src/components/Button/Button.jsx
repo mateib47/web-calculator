@@ -1,5 +1,5 @@
 import "./button.scss";
-import { useEffect,useRef } from "react";
+import { useEffect, useRef } from "react";
 
 const Button = ({
   character,
@@ -10,13 +10,13 @@ const Button = ({
   setDecimal,
   result,
   setResult,
+  history,
+  setHistory,
 }) => {
-
-  const handleKeyboard = () => {
-
-  }
+  const handleKeyboard = () => {};
 
   const handleChange = (character) => {
+    //setResult(character);
     switch (character) {
       case "AC":
         setExpr(0);
@@ -31,6 +31,7 @@ const Button = ({
         let res = evalExpr(expr);
         setExpr(res);
         setResult(res);
+        setHistory(history + expr + " = " + res + `\n`); //fixme
         break;
       case ".":
         if (decimal == 1) {
@@ -75,7 +76,7 @@ const Button = ({
   const handleFirstChar = (char) => {
     if (!isOperator(char)) {
       setExpr(char);
-      console.log(char)
+      console.log(char);
     }
   };
 
