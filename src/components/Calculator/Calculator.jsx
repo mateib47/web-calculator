@@ -38,8 +38,8 @@ const Calculator = ({ expr, setExpr, history, setHistory }) => {
     <div className="calculator">
       <div className="top">
         <Display text={expr} />
-        <History text={history} />
         <Result result={result} setResult={setResult} />
+        <History text={history} />
       </div>
       <div className="bottom">
         <Box sx={{ flexGrow: 1, height: "90%" }}>

@@ -1,9 +1,13 @@
-import './history.scss'
+import "./history.scss";
 
-const History = ({text}) => {
+const History = ({ text }) => {
   return (
-    <p className='history'>{text}</p>
-  )
-}
+    <div className="history">
+      {text.split("<br/>").map((i) => {
+        return <p>{i}</p>;
+      })}
+    </div>
+  );
+};
 
-export default History
+export default History;

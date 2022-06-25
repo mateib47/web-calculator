@@ -16,12 +16,12 @@ const Button = ({
   const handleKeyboard = () => {};
 
   const handleChange = (character) => {
-    //setResult(character);
     switch (character) {
       case "AC":
         setExpr(0);
         setDecimal(0);
         setResult(0);
+        setHistory('');
         break;
       case "DEL":
         if (expr && expr.slice(-1) == ".") setDecimal(0);
@@ -31,7 +31,7 @@ const Button = ({
         let res = evalExpr(expr);
         setExpr(res);
         setResult(res);
-        setHistory(history + expr + " = " + res + `\n`); //fixme
+        setHistory(history + expr + " = " + res+'<br/>' ); 
         break;
       case ".":
         if (decimal == 1) {
