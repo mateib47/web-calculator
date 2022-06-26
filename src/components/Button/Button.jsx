@@ -18,20 +18,14 @@ const Button = ({
   const handleChange = (character) => {
     switch (character) {
       case "AC":
-        setExpr(0);
-        setDecimal(0);
-        setResult(0);
-        setHistory('');
+        resetStates();
         break;
       case "DEL":
         if (expr && expr.slice(-1) == ".") setDecimal(0);
         expr.length > 1 ? setExpr(expr.slice(0, -1)) : setExpr(0);
         break;
       case "=":
-        let res = evalExpr(expr);
-        setExpr(res);
-        setResult(res);
-        setHistory(history + expr + " = " + res+'<br/>' ); 
+        setResults();
         break;
       case ".":
         if (decimal == 1) {
@@ -43,20 +37,11 @@ const Button = ({
         if (expr == 0) break;
       default:
         if (result != 0) {
-          if (isOperator(character)) {
-            setExpr(result + character);
-          } else {
-            handleFirstChar(character);
-          }
-          setResult(0);
+          handleNextExpr();
         } else if (expr == 0) {
           handleFirstChar(character);
         } else {
-          if (isOperator(character)) {
-            handleOperator(character);
-          } else {
-            setExpr("" + expr + character);
-          }
+          handleChar():
         }
     }
   };
@@ -67,6 +52,37 @@ const Button = ({
   //     window.removeEventListener("keydown", handleKeyboard);
   //   };
   // }, []);
+  
+const resetStates = () => {
+    setExpr(0);
+    setDecimal(0);
+    setResult(0);
+    setHistory('');
+}
+
+const setResults = () => { 
+    let res = evalExpr(expr);
+    setExpr(res);
+    setResult(res);
+    setHistory(history + expr + " = " + res+'<br/>' ); 
+}
+
+const handleNextExpr = () => {
+    if (isOperator(character)) {
+       setExpr(result + character);
+    } else {
+       handleFirstChar(character);
+    }
+    setResult(0);
+}
+
+const handleChar = () => {
+    if (isOperator(character)) {
+       handleOperator(character);
+    } else {
+       setExpr("" + expr + character);
+    }
+}
 
   const isOperator = (o) => {
     if (o == "%" || o == "/" || o == "*" || o == "+" || o == "-") return true;
