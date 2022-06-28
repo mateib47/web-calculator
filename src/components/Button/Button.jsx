@@ -36,12 +36,12 @@ const Button = ({
       case "0":
         if (expr == 0) break;
       default:
-        if (result != 0) {
+        if (result != '') {
           handleNextExpr();
         } else if (expr == 0) {
           handleFirstChar(character);
         } else {
-          handleChar():
+          handleChar();
         }
     }
   };
@@ -56,7 +56,7 @@ const Button = ({
 const resetStates = () => {
     setExpr(0);
     setDecimal(0);
-    setResult(0);
+    setResult('');
     setHistory('');
 }
 
@@ -64,7 +64,7 @@ const setResults = () => {
     let res = evalExpr(expr);
     setExpr(res);
     setResult(res);
-    setHistory(history + expr + " = " + res+'<br/>' ); 
+    setHistory(expr + " = " + res+'<br/>' + history); 
 }
 
 const handleNextExpr = () => {
@@ -73,7 +73,7 @@ const handleNextExpr = () => {
     } else {
        handleFirstChar(character);
     }
-    setResult(0);
+    setResult('');
 }
 
 const handleChar = () => {

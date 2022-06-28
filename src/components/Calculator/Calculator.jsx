@@ -1,7 +1,6 @@
 import "./calculator.scss";
 import Button from "../Button/Button";
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { useState } from "react";
 import Display from "../Display/Display";
@@ -10,7 +9,7 @@ import History from "../History/History";
 
 const Calculator = ({ expr, setExpr, history, setHistory }) => {
   const [decimal, setDecimal] = useState(0);
-  const [result, setResult] = useState(0);
+  const [result, setResult] = useState('');
 
   let chars = [
     { char: "AC", id: "clear" },

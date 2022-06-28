@@ -1,3 +1,5 @@
+@import "../../global.scss";
+
 .calculator {
     width: 30vw;
     height: 75vh;
@@ -7,6 +9,10 @@
     display: flex;
     flex-direction: column;
     padding: 30px;
+
+    @include mobile {
+        width: 70vw;
+    }
 
     .top{
         flex: 0.3;
